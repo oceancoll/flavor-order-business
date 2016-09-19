@@ -1,0 +1,62 @@
+{% extends 'index_base.html' %}
+{% block css %}
+    <body style="background-color: #C1CDCD"></body>
+{% endblock %}
+{% block content %}
+   <table class="table table-striped" style="text-align: center;">
+   <caption style="text-align: center;font-size: 20px;color: black;"><b>菜品列表</b></caption>
+   <thead>
+      <tr>
+         <th style="text-align: center">菜品名称</th>
+         <th style="text-align: center">菜品价格</th>
+         <th style="text-align: center">菜品种类</th>
+         <th style="text-align: center">菜品介绍</th>
+         <th style="text-align: center">实物图</th> 
+         <th style="text-align: center">操作</th>
+      </tr>
+   </thead>
+    {% for dish in objects.object_list %}
+        <tbody>
+      <tr>
+         <td>{{ dish.dishname }}</td>
+         <td>{{ dish.dishprice }}</td>
+         <td>{{ dish.dishkind }}</td>
+         <td>{{ dish.dishintroduce }}</td>
+         <td><img src="/static/images/dishphoto/thumbnail/{{ dish.dishphoto }}"></td>
+         <!--<td><img src="../../static/images/dishphoto/thumbnail/{{ dish.dishphoto }}"></td>-->
+         <td><a href="/fl/showmodifydish/?id={{ dish.id }}"><button class="btn btn-success btn-sm">修改</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/fl/deletedish/?id={{ dish.id }}"><button class="btn btn-danger btn-sm">删除</button></a></td>
+      </tr>
+   </tbody>
+    {% endfor %}
+   </table>
+   <div style="text-align: center">
+   <ul class="pagination">
+       {% if objects.has_previous %}
+       <li><a href="?page={{ objects.previous_page_number }}">&laquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&laquo;</a></li>
+       {% endif %}
+
+       {% for i in page_range %}
+            {% ifequal i objects.number %}
+            <li class="active"><a>{{ i }}</a></li>
+            {% else %}
+            <li><a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a></li>
+            {% endifequal %}
+       {% endfor %}
+
+       {% if objects.has_next %}
+       <li><a href="?page={{ objects.next_page_number }}">&raquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&raquo;</a></li>
+       {% endif %}
+   </ul>
+   </div>
+   <!--<script type="text/javascript">
+   $(document).ready(function(){
+       if (document.referrer != 'http://127.0.0.1:8000/fl/index/'){
+           window.location='/fl/login';
+       }
+   })
+   </script>-->
+{% endblock %}

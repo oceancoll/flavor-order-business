@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>order now|{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    {% block css %}{% endblock %}
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% block script %}{% endblock %}
+    <link rel="icon" href="/static/images/business/florder_icon.ico" type="image/x-icon" />
+    <style type="text/css">
+        body{background-color: #ADD8E6}
+    </style>
+</head>
+<body>
+<div style="margin-bottom: 50px;">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <div class="navbar-header">
+      <!--<a class="navbar-brand" href="#">flavor-order-business</a>-->
+      <a class="navbar-brand" href="#">order now</a>
+   </div>
+   <div style="margin-right: 40px">
+      <ul class="nav navbar-nav navbar-right">
+
+          {% if username %}
+              <li><a href="/fl/index/">我的店铺</a></li>
+              <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/fl/show/">更改资料</a></li>
+                            <li><a href="/fl/showpwd/">修改密码</a></li>
+                            <li><a href="/fl/showuserphoto/">更换商户图标</a></li>
+          				</ul>
+					</li>
+              <li><a href="/fl/logout/">退出</a></li>
+          {% else %}
+          <li><a href="/">首页</a></li>
+          <li><a href="/fl/login/">登录</a></li>
+          <li><a href="/fl/register/">注册</a></li>
+          {% endif %}
+          <li><a href="#">帮助</a></li>
+      </ul>
+   </div>
+</nav>
+</div>
+<h4>{% block head %}{% endblock %}</h4>
+{% block content %}
+{% endblock %}
+</body>
+</html>

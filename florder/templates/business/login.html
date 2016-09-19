@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block css %}<link rel="stylesheet" href="/static/css/base.css">
+<body background="http://tu.etang.info/uploads/2016/03/page1.jpg" style="overflow: hidden"></body>
+{% endblock %}
+{% block title %}登录{% endblock %}
+{% block content %}
+    <!--<div class="login">
+    <div>
+    <div class="login-project"></div>
+    </div>-->
+    <!--<div class="login-main">-->
+        <br><br><br><br><br><br>
+        <!--<div class="login-main-picture"></div>-->
+        <div class="panel panel-primary login-text">
+            <div class="panel-heading">
+            <h1 class="panel-title text-center">用户登录</h1>
+            </div>
+            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/login/">
+      <div class="form-group" style="margin-top: 30px">
+      <label class="col-sm-4 control-label">用户名</label>
+      <div class="col-sm-6">
+         <input type="text" name="username" class="form-control"
+            placeholder="请输入用户名">
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">密码</label>
+      <div class="col-sm-6">
+         <input type="password" name="password" class="form-control"
+            placeholder="请输入密码">
+          <a href="/fl/forgetpwd/">忘记密码？</a>
+      </div>
+   </div>
+
+     <button class="btn btn-success" style="width: 185px;margin-left: 140px;" >登录</button>
+    </form>
+     <div style="margin-left: 140px"><a href="/fl/register/">没有账号？马上注册~</a></div>
+     <div class="form-group">
+      <label class="col-sm-4 control-label">&nbsp;</label>
+      <div class="col-sm-8" style="text-align: left">
+         {{ errors }}
+      </div>
+   </div>
+        </div>
+    <!--</div>
+
+    </div>-->
+{% endblock %}

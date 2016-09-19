@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block css %}<link rel="stylesheet" href="/static/css/base.css">
+<body background="http://tu.etang.info/uploads/2016/03/page5.jpg"></body>
+{% endblock %}
+{% block title %}修改信息{% endblock %}
+{% block content %}
+<div class="panel panel-primary modify_detial">
+<div class="panel-heading">
+        <h1 class="panel-title text-center">修改信息</h1>
+    </div>
+<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/modify/">
+{% for info in username %}
+    <div class="form-group" style="margin-top: 10px">
+      <label class="col-sm-3 control-label">饭店名</label>
+      <div class="col-sm-6">
+         <input type="text" name="resname" class="form-control"
+            placeholder="请输入饭店名" required="required" value={{ info.resname }} >
+      </div>
+    <label class="control-label"><font color="red">*必填项</font></label>
+   </div>
+   <div class="form-group">
+      <label class="col-sm-3 control-label">饭店地址</label>
+      <div class="col-sm-6">
+         <input type="text" name="resaddress" class="form-control"
+            placeholder="请输入饭店地址" required="required" value={{ info.resaddress }}>
+      </div>
+      <label class="control-label"><font color="red">*必填项</font></label>
+   </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">饭店电话</label>
+      <div class="col-sm-6">
+         <input type="text" name="resphone" class="form-control"
+            placeholder="请输入饭店电话" required="required" value={{ info.resphone }}>
+      </div>
+      <label class="control-label"><font color="red">*必填项</font></label>
+   </div>
+    <!--<div class="form-group">
+      <label class="col-sm-4 control-label">饭店图片</label>
+      <div class="col-sm-6">
+         <input type="file" name="resphoto" class="form-control"
+            value={{ info.resphoto }}>
+      </div>
+   </div>-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">饭店简介</label>
+      <div class="col-sm-6">
+         <input type="text" name="resintroduce" class="form-control"
+            placeholder="请输入饭店简介" value={{ info.resintroduce }}>
+      </div>
+   </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">营业时间</label>
+      <div class="col-sm-6">
+         <input type="text" name="resopentime" class="form-control"
+            placeholder="请输入营业时间" required="required" value={{ info.resopentime }}>
+      </div>
+      <label class="control-label"><font color="red">*必填项</font></label>
+   </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">注意事项</label>
+      <div class="col-sm-6">
+         <input type="text" name="resnotice" class="form-control"
+            placeholder="请输入注意事项" value={{ info.resnotice }}>
+      </div>
+   </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">其它</label>
+      <div class="col-sm-6">
+         <input type="text" name="resother" class="form-control"
+            placeholder="其他" value={{ info.resother }}>
+      </div>
+   </div>
+{% endfor %}
+<div class="form-group">
+      <label class="col-sm-3 control-label">&nbsp;</label>
+      <div class="col-sm-5" style="text-align: center">
+         {{ errors }}
+      </div>
+   </div>
+<button class="btn btn-success" style="width: 200px;margin-left: 290px" >确认修改</button>
+</form>
+</div>
+{% endblock %}

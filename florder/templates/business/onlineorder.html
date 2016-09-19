@@ -1,0 +1,81 @@
+{% extends 'index_base.html' %}
+{% block css %}
+    <body style="background-color: #C1CDCD"></body>
+{% endblock %}
+{% block script %}
+    <script>
+    var int=self.setInterval("ajax_request()",5000)
+function ajax_request()
+{
+var xmlhttp;
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {
+    // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("result").innerHTML=xmlhttp.responseText;
+  }
+}
+xmlhttp.open("GET", "/fl/online/", true);
+xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+xmlhttp.send();
+location.reload();
+}
+</script>
+{% endblock %}
+{% block content %}
+   <table class="table table-striped" style="text-align: center;">
+   <caption style="text-align: center;font-size: 20px;color: black;"><b>下单列表</b></caption>
+   <thead>
+      <tr>
+         <th style="text-align: center">桌号</th>
+         <th style="text-align: center">下单时间</th>
+         <th style="text-align: center">下单内容</th>
+         <th style="text-align: center">总额</th>
+         <th style="text-align: center">操作</th>
+      </tr>
+   </thead>
+    {% for i in objects.object_list %}
+
+        <tbody>
+      <tr>
+         {% for j in i  %}
+         {% if forloop.counter0 %}
+         <td>{{ j }}</td>
+         {% endif %}
+         {% endfor %}
+         <td><a href="/fl/print_order/?id={{ i }}"><button class="btn btn-primary btn-sm">订单打印</button></a>&nbsp;&nbsp;&nbsp;<a href="/fl/finishorder/?id={{ i }}"><button class="btn btn-success btn-sm">已完成</button></a></td>
+      </tr>
+   </tbody>
+
+    {% endfor %}
+   </table>
+   <div style="text-align: center">
+   <ul class="pagination" style="margin-top: 0px">
+       {% if objects.has_previous %}
+       <li><a href="?page={{ objects.previous_page_number }}">&laquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&laquo;</a></li>
+       {% endif %}
+
+       {% for i in page_range %}
+            {% ifequal i objects.number %}
+            <li class="active"><a>{{ i }}</a></li>
+            {% else %}
+            <li><a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a></li>
+            {% endifequal %}
+       {% endfor %}
+
+       {% if objects.has_next %}
+       <li><a href="?page={{ objects.next_page_number }}">&raquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&raquo;</a></li>
+       {% endif %}
+   </ul>
+   </div>
+{% endblock %}

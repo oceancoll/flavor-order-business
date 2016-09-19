@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    忘记密码
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/base.css">
+    <body background="http://tu.etang.info/uploads/2016/03/page5.jpg" style="overflow: hidden"></body>
+{% endblock %}
+{% block content %}
+    <div class="panel panel-primary forgetpwd_box">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">忘记密码</h1>
+    </div>
+    <br><br><br><br>
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/sendpwdemail/">
+      <div class="form-group" style="margin-top: 20px">
+      <label class="col-sm-4 control-label">用户名</label>
+      <div class="col-sm-5">
+         <input type="text" name="username" class="form-control"
+            placeholder="请输入注册用户名" required="required">
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">邮箱</label>
+      <div class="col-sm-5">
+         <input type="text" name="email" class="form-control"
+            placeholder="请输入注册邮箱" required="required">
+      </div>
+   </div>
+        <div class="form-group">
+      <label class="col-sm-4 control-label">&nbsp;</label>
+      <div class="col-sm-5" style="text-align: center">
+         {{ errors }}
+      </div>
+   </div>
+     <button class="btn btn-success" style="width: 250px;margin-left: 310px" >确定</button>
+    </form>
+    </div>
+{% endblock %}

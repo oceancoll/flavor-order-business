@@ -1,0 +1,34 @@
+{% extends 'index_base.html' %}
+{% block css %}
+    <body style="background-color: #C1CDCD"></body>
+{% endblock %}
+{% block content %}
+    <div class="panel panel-primary adddish_box">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">添加餐桌</h1>
+    </div>
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/addtable/">
+      <div class="form-group" style="margin-top: 100px">
+      <label class="col-sm-4 control-label">编号</label>
+      <div class="col-sm-5">
+         <input type="text" name="tablenum" class="form-control"
+            placeholder="餐桌编号" maxlength="3" required="required">
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">人数</label>
+      <div class="col-sm-5">
+         <input type="text" name="tableperson" class="form-control"
+            placeholder="该餐桌可容纳人数" maxlength="2" required="required">
+      </div>
+   </div>
+        <div class="form-group">
+      <label class="col-sm-4 control-label">&nbsp;</label>
+      <div class="col-sm-5" style="text-align: center">
+         {{ errors }}
+      </div>
+   </div>
+     <button class="btn btn-success" style="width: 250px;margin-left: 310px" >添加餐桌</button>
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'index_base.html' %}
+{% block css %}
+    <body style="background-color: #C1CDCD"></body>
+{% endblock %}
+{% block script %}<script src="/static/js/resetphoto.js"></script>{% endblock %}
+{% block content %}
+    <div class="panel panel-primary adddish_box">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">添加菜品</h1>
+    </div>
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data"  action="/fl/adddish/">
+      <div class="form-group" style="margin-top: 20px">
+      <label class="col-sm-4 control-label">名称</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishname" class="form-control" id="dishname" onkeyup="checkdish()"
+            placeholder="菜品名称" maxlength="8" required="required">
+      </div>
+      <span id="dishInfo"></span>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">价格</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishprice" class="form-control"
+            placeholder="菜品价格" maxlength="3" required="required">
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">介绍</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishintroduce" class="form-control"
+            placeholder="菜品介绍" maxlength="12">
+      </div>
+   </div>
+      <div class="form-group">
+          <label class="col-sm-4 control-label">分类</label>
+          <div class="col-sm-5">
+      <div class="radio">
+      <label>
+              <input type="radio" name="dishkind" value="cold">凉菜
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" name="dishkind" value="hot">热菜
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" name="dishkind" value="main">主食
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" name="dishkind" value="dessert">甜品
+      </label>
+      </div>
+      <!--<div class="radio">
+      <label>
+              <input type="radio" name="dishkind" value="hot">热菜
+      </label>
+      </div>-->
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">实物图</label>
+      <div class="col-sm-5">
+         <input type="file" id="dishphoto"  required="required" name="dishphoto"/>(*图片为.jpg或者.png格式，应小于1M)
+          <br/>
+         <div id="img"> </div>
+      </div>
+   </div>
+        <button class="btn btn-success" style="width: 250px;margin-left: 310px" >添加菜品</button>
+        <div class="form-group">
+      <label class="col-sm-4 control-label">&nbsp;</label>
+      <div class="col-sm-5" style="text-align: center">
+         {{ errors }}
+      </div>
+   </div>
+
+    </form>
+    </div>
+    <script>
+    function checkdish(){
+        var xmlhttp;
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {
+    // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("dishInfo").innerHTML=xmlhttp.responseText;
+  }
+}
+
+var a = document.getElementById("dishname").value;
+        //alert(a);
+xmlhttp.open("GET", "/fl/checkdish/" + a + "/", true);
+xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+xmlhttp.send();
+    }
+            /*function check(){
+                var dishphoto = $('#dishphoto').val();
+                //alert(resphoto)
+                if (dishphoto == ''){
+                    alert('请选择实物图！');
+                    $("form").submit(function(e){
+                        e.preventDefault();
+                        //alert("Submit prevented");
+                    });
+                    return false;
+                    //location.reload()
+                }
+            }*/
+            //alert(resphoto);
+            $('#dishphoto').filereader({
+                        type:['jpg','jpeg','png'],
+                        max_size:1024,
+                        preview:$('#img'),
+                        //success:function(){alert('已经ok啦')},
+                        preview_attr:{id:'ttt', height:'100px', width:'100px'}
+                    });
+        </script>
+{% endblock %}

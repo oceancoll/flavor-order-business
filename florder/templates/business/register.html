@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block css %}<link rel="stylesheet" href="/static/css/base.css">{% endblock %}
+{% block title %}注册{% endblock %}
+{% block content %}
+    <div class="panel panel-primary register">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">注册页面</h1>
+    </div>
+    <div class="panel-body register_box">
+<form method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <table align="center">
+            <tr>
+            <td>{{ uf.username.label }}</td>
+            <td>{{ uf.username }}</td>
+            <td>{{ uf.username.errors }}</td>
+            <td>{{ errors1 }}</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center">首字母为英文</td>
+            </tr>
+            <tr>
+            <td style="line-height: 10px;"></td>
+            <td style="text-align: center;line-height: 10px;">&nbsp;</td>
+            </tr>
+            <tr>
+            <td>{{ uf.password1.label }}</td>
+            <td>{{ uf.password1 }}</td>
+            <td>{{ uf.password1.errors }}</td>
+            <td>{{ errors }}</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center">请输入密码</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center;line-height: 10px;">&nbsp;</td>
+            </tr>
+            <tr>
+            <td>{{ uf.password2.label }}</td>
+            <td>{{ uf.password2 }}</td>
+            <td>{{ uf.password2.errors }}</td>
+            <td>{{ errors3 }}</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center">请再次输入密码</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center;line-height: 10px;">&nbsp;</td>
+            </tr>
+            <tr>
+            <td>{{ uf.email.label }}</td>
+            <td>{{ uf.email }}</td>
+            <td>{{ uf.email.errors }}</td>
+            <td>{{ errors2 }}</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center">请输入常用邮箱</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center;line-height: 10px;">&nbsp;</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center"><input id="chkagree" type="checkbox" name="checkbox" value="agree">我同意<a>《服务条款》</a></td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center;line-height: 10px;">&nbsp;</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center"><button id="btnreg" type="submit" class="btn btn-success" style="width: 200px">马上注册</button></td>
+            </tr>
+            <tr>
+            <td></td>
+            <td style="text-align: center"><a href="/fl/login/">已有账号？马上登录~</a></td>
+            </tr>
+    </table>
+
+</form>
+</div>
+</div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#btnreg").bind("click", function () {
+            var $check = $("#chkagree");
+            if ($check.is(":checked")) {
+                $("form").submit();
+            } else {
+                $("form").submit(function (e) {
+                    e.preventDefault();
+                    alert("请同意服务条款");
+                    location.reload()
+                });
+            }
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css" media="screen" type="text/css" />
+    <body style="background-color: #C1CDCD;overflow: hidden"></body>
+{% endblock %}
+{% block script %}
+    <script src="/static/js/index.js"></script>
+{% endblock %}
+{% block title %}我的店铺{% endblock %}
+{% block content %}
+<div class="nav1">
+   <ul id="accordion" class="accordion">
+       <li>
+           <div class="link1">商户ID:{{ userid }}</div>
+       </li>
+       <li>
+           <div class="link1"><img src={{ userphoto }}/></div>
+       </li>
+		<li>
+			<div class="link">菜单<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="/fl/showadddish/" target="myframe">添加菜品</a></li>
+				<li><a href="/fl/showdish/" target="myframe">查看菜品</a></li>
+				<!--<li><a href="#">CSS</a></li>
+				<li><a href="#">Maquetacion web</a></li>-->
+			</ul>
+		</li>
+       <li>
+			<div class="link">餐桌<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="/fl/showaddtable/" target="myframe">添加餐桌</a></li>
+				<li><a href="/fl/showtable/" target="myframe">查看餐桌</a></li>
+				<!--<li><a href="#">CSS</a></li>
+				<li><a href="#">Maquetacion web</a></li>-->
+			</ul>
+		</li>
+       <li>
+           <div class="link">下单列表<i class="fa fa-chevron-down"></i></div>
+           <ul class="submenu">
+				<li><a href="/fl/online/" target="myframe">到店订单</a></li>
+				<li><a href="/fl/subscribe/" target="myframe">预约订单</a></li>
+			</ul>
+       </li>
+       <li>
+           <div class="link">历史订单<i class="fa fa-chevron-down"></i></div>
+           <ul class="submenu">
+				<li><a href="/fl/history/" target="myframe">所有订单</a></li>
+				<li><a href="/fl/showfindorder/" target="myframe">查询订单</a></li>
+			</ul>
+       </li>
+   </ul>
+    <!--<ul class="nav nav-pills nav-stacked">
+       <li><a href="#">@@@</a></li>
+   <li><a href="#">@@@</a></li>
+   <li><a href="#">@@@</a></li>
+   <li><a href="#">Java</a></li>
+   <li><a href="#">PHP</a></li>
+   </ul>-->
+
+</div>
+<div class="nav2" id="main">
+<iframe id="myframe" name="myframe" frameborder="0" src="/fl/online/">
+
+</iframe>
+</div>
+{% endblock %}

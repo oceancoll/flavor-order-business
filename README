@@ -1,0 +1,5 @@
+在线点餐系统（商户端）
+note:
+1.修改setting.py中mysql的user,password
+2.修改setting.py中email的username,password
+3.添加客户端数据表，数据表参见florder.sql

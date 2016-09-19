@@ -1,0 +1,47 @@
+{% extends 'index_base.html' %}
+{% block script %}
+    <script src="/static/js/moment.js"></script>
+    <script src="/static/js/daterangepicker.js"></script>
+{% endblock %}
+{% block css %}
+<body style="background-color: #C1CDCD"></body>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/daterangepicker-bs3.css" />
+{% endblock %}
+{% block content %}
+    <div class="panel panel-primary adddish_box">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">查询订单</h1>
+    </div>
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/findorder/">
+      <div class="form-group" style="margin-top: 100px">
+      <label class="col-sm-4 control-label">查询时间</label>
+      <div class="col-sm-4">
+         <div class="control-group">
+                    <div class="controls">
+                     <div class="input-prepend input-group">
+                       <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span><input type="text" readonly="readonly" name="reservation" id="reservation" class="form-control" value="2016-01-01 - 2016-04-01" />
+                     </div>
+                    </div>
+                  </div>
+      </div>
+   </div>
+        <div class="form-group">
+      <label class="col-sm-4 control-label">&nbsp;</label>
+      <div class="col-sm-5" style="text-align: center">
+         {{ errors }}
+      </div>
+   </div>
+     <button class="btn btn-success" style="width: 245px;margin-left: 275px" >查询订单</button>
+    </form>
+    </div>
+    <script type="text/javascript">
+               //var time = $('reservation').val();
+               //alert(time);
+               $(document).ready(function() {
+                  $('#reservation').daterangepicker(null, function(start, end, label) {
+                    console.log(start.toISOString(), end.toISOString(), label);
+                  });
+               });
+               </script>
+{% endblock %}

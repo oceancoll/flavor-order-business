@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block css %}<link rel="stylesheet" href="/static/css/base.css">
+<body background="http://tu.etang.info/uploads/2016/03/page5.jpg"></body>
+{% endblock %}
+{% block script %}<script src="/static/js/resetphoto.js"></script>{% endblock %}
+{% block title %}更改头像{% endblock %}
+{% block content %}
+    <div class="panel panel-primary modify_detial">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">更换商户图标</h1>
+    </div>
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/resetuserphoto/">
+      <div class="form-group" style="margin-top: 50px">
+      <label class="col-sm-4 control-label">原图标</label>
+      <div class="col-sm-5">
+         <img alt="商户原图标" src={{ resphoto }} />
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">新图标</label>
+      <div class="col-sm-4">
+         <input type="file" id="resphoto" required="required" name="resphoto"/>(*图片为.jpg或者.png格式，应小于1M)
+          <br/>
+         <div id="img"> </div>
+      </div>
+   </div>
+     <button class="btn btn-success" style="width: 250px;margin-left: 270px" >更换商户图标</button>
+    </form>
+    </div>
+    <script>
+            /*function check(){
+                var resphoto = $('#resphoto').val();
+                //alert(resphoto)
+                if (resphoto == ''){
+                    alert('请选择新图标！');
+                    $("form").submit(function(e){
+                        e.preventDefault();
+                        //alert("Submit prevented");
+                    });
+                    location.reload()
+                }
+            }*/
+            //alert(resphoto);
+            $('#resphoto').filereader({
+                        type:['jpg','jpeg','png'],
+                        max_size:1024,
+                        preview:$('#img'),
+                        //success:function(){alert('已经ok啦')},
+                        preview_attr:{id:'ttt', height:'150px', width:'150px'}
+                    });
+        </script>
+{% endblock %}

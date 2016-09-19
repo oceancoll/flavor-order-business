@@ -1,0 +1,124 @@
+{% extends 'index_base.html' %}
+{% block script %}<script src="/static/js/resetphoto.js"></script>{% endblock %}
+{% block content %}
+    <div class="panel panel-primary modifydish_box">
+    <div class="panel-heading">
+        <h1 class="panel-title text-center">修改菜品</h1>
+    </div>
+     {% for dishinfo in dish %}
+    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/fl/modifydish/?id={{ dishinfo.id }}">
+
+        <div class="form-group" style="margin-top: 15px">
+      <label class="col-sm-4 control-label">名称</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishname" maxlength="8" id="dishname" class="form-control" onkeyup="checkdish()" required="required"
+            value={{ dishinfo.dishname }}>
+      </div>
+      <span id="dishInfo"></span>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">价格</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishprice" maxlength="3" class="form-control" required="required"
+            value={{ dishinfo.dishprice }}>
+      </div>
+   </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">介绍</label>
+      <div class="col-sm-5">
+         <input type="text" name="dishintroduce" maxlength="12" class="form-control"
+            value={{ dishinfo.dishintroduce }}>
+      </div>
+   </div>
+      <div class="form-group">
+          <label class="col-sm-4 control-label">分类</label>
+          <div class="col-sm-5">
+      <div class="radio">
+      <label>
+              <input type="radio" id="cold" name="dishkind" value="cold" data-value="{{ dishinfo.dishkind }}">凉菜
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" id="hot" name="dishkind" value="hot">热菜
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" id="main" name="dishkind" value="main">主食
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+              <input type="radio" id="dessert" name="dishkind" value="dessert">甜品
+      </label>
+      </div>
+      <!--<div class="radio">
+      <label>
+              <input type="radio" id="hot" name="dishkind" value="hot">热菜
+      </label>
+      </div>-->
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="col-sm-4 control-label">实物图</label>
+      <div class="col-sm-5">
+         <div id="img" style="margin-bottom: 7px"><img alt="原实物图" src={{ dishphoto }} /></div>
+         <input type="file" id="dishphoto" name="dishphoto"/>(*图片为.jpg或者.png格式，应小于1M)
+         <br>
+      </div>
+   </div>
+
+
+     <button class="btn btn-success" style="width: 250px;margin-left: 310px">修改菜品</button>
+    </form>
+     {% endfor %}
+    </div>
+     <script type="text/javascript">
+     function checkdish(){
+        var xmlhttp;
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {
+    // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("dishInfo").innerHTML=xmlhttp.responseText;
+  }
+}
+
+var a = document.getElementById("dishname").value;
+        //alert(a);
+xmlhttp.open("GET", "/fl/checkdish/" + a + "/", true);
+xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+xmlhttp.send();
+    }
+            $('#dishphoto').filereader({
+                        type:['jpg','jpeg','png'],
+                        max_size:1024,
+                        preview:$('#img'),
+                        //success:function(){alert('已经ok啦')},
+                        preview_attr:{id:'ttt', height:'150px', width:'150px'}
+                    });
+        //$('input[name="dishkind"][data-value="cold"]').attr("checked",true);
+
+      $(document).ready(function(){
+          var dishkind1 = {{ dishkind|safe }}
+          //alert(dishkind1);
+          if (dishkind1 == 'cold'){
+              $('input[name="dishkind"][value=cold]').attr("checked",true);
+          }
+          else if (dishkind1 == 'hot'){
+              $('input[name="dishkind"][value=hot]').attr("checked",true);
+          }
+          else if (dishkind1 == 'main'){
+              $('input[name="dishkind"][value=main]').attr("checked",true);
+          }
+          else if (dishkind1 == 'dessert'){
+              $('input[name="dishkind"][value=dessert]').attr("checked",true);
+          }
+
+          //$('input[name="dishkind"][value=cold]').attr("checked",true);
+      })
+
+
+    </script>
+{% endblock %}
